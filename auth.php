@@ -16,43 +16,36 @@
             if ( $result < 1 ){
                 $sql = $conn->query("INSERT INTO player (nama, email) VALUES ('$nama', '$email')") or die(mysqli_error($conn));
 
-                if (isset($_POST['loginkeeping'])) {
-                    $remember = TRUE;
-                    setcookie("username", $nama, time() + 3600, "/");
-                    setcookie("email", $email, time() + 3600, "/");
-                }
-                $_SESSION['username'] = $nama;
-                $_SESSION['email'] = $email;
-                $_SESSION['is_login'] = TRUE;
-
                 setcookie("username", $nama, time() + 3600, "/");
                 setcookie("email", $email, time() + 3600, "/");
-                header('Location: index.php');
+                $_SESSION['skor'] = 0;
+                $_SESSION['live'] = 5;
+                $_SESSION['is_login'] = TRUE;
+
+                
+                // header('Location: index.php');
             }
             else {
                 $sql = "UPDATE player SET nama='$nama' WHERE email='$email'";
                
-                // if ($conn->query($sql) === TRUE) {
-                //     echo "Record updated successfully";
-                // } else {
-                //     echo "Error updating record: " . $conn->error;
-                // }
-                if (isset($_POST['loginkeeping'])) {
-                    $remember = TRUE;
-                    setcookie("username", $nama, time() + 3600, "/");
-                    setcookie("email", $email, time() + 3600, "/");
+                if ($conn->query($sql) === TRUE) {
+                    echo "Record updated successfully";
+                } else {
+                    echo "Error updating record: " . $conn->error;
                 }
-                $_SESSION['username'] = $nama;
-                $_SESSION['email'] = $email;
+                setcookie("username", $nama, time() + 3600, "/");
+                setcookie("email", $email, time() + 3600, "/");
+                $_SESSION['skor'] = 0;
+                $_SESSION['live'] = 5;
                 $_SESSION['is_login'] = TRUE;
-                header('Location: index.php');
+                // header('Location: index.php');
             }
         }
     }
 
 
     function auth(){
-        if(!isset($_SESSION['username'])){
+        if(!isset($_COOKIE['username'])){
             echo "<p>Belum masuk akun,</p>";
             echo "<p><a href='login.php'>Login</a> dulu ya...</p>";
             // $_COOKIE['email'];

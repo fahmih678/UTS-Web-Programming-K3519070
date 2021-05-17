@@ -1,9 +1,11 @@
 <?php 
-    if (isset($_COOKIE['player'])){
-        header("Location: index.php");
-    }
     include_once('auth.php');
     login();
+    if (isset($_COOKIE['username']) && !isset($_POST['loginAgain'])){
+        header("Location: index.php");
+    } else {
+        setcookie('username');
+    }
 
 ?>
 
