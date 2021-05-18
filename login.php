@@ -26,16 +26,12 @@
                 <form  action="login.php" method="POST"> 
                     <h1>Log in</h1> 
                     <p> 
-                        <label for="username" class="uname" data-icon="u" > Your username </label>
+                        <label for="username" class="uname" data-icon="u" >Maukkan Nama : </label>
                         <input id="username" name="username" required="required" type="text" placeholder="username"/>
                     </p>
                     <p> 
-                        <label for="email" class="email" data-icon="u" > Your email </label>
+                        <label for="email" class="email" data-icon="u" >Masukkan Email :</label>
                         <input id="email" name="email" required="required" type="text" placeholder="email@gmail.com"/>
-                    </p>
-                    <p class="keeplogin"> 
-                        <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
-                        <label for=" ">Keep me logged in</label>
                     </p>
                     <p class="login button"> 
                         <input type="submit" value="submit" name="submit" id="submit"/> 

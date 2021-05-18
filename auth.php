@@ -7,7 +7,7 @@
             $nama = $_POST['username'];
             $email = $_POST['email'];
             
-            $cek = $conn->query("SELECT * FROM player WHERE email = '$email'") ;
+            $cek = $conn->query("SELECT * FROM player WHERE email = '$email'");
             // $result = mysqli_num_rows($cek);
             $result = $cek->num_rows;
     
@@ -23,7 +23,7 @@
                 $_SESSION['is_login'] = TRUE;
 
                 
-                // header('Location: index.php');
+                header('Location: index.php');
             }
             else {
                 $sql = "UPDATE player SET nama='$nama' WHERE email='$email'";
@@ -38,7 +38,7 @@
                 $_SESSION['skor'] = 0;
                 $_SESSION['live'] = 5;
                 $_SESSION['is_login'] = TRUE;
-                // header('Location: index.php');
+                header('Location: index.php');
             }
         }
     }

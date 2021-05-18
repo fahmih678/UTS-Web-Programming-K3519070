@@ -29,8 +29,7 @@
         }
         $hasil = $_SESSION['hasilRandom'];
     } else{
-        
-        header('Location: topten.php');
+        header("Location: topten.php?gameOver=true");
     }
 
     
@@ -49,7 +48,6 @@
 <body>
     <div>
         <h1>Game Penjumlahan</h1>
-        <?= $_SESSION['ready']; ?>
     </div>
 <?php if(!$_SESSION['ready']) { ?>
     <div>
@@ -63,10 +61,18 @@
             <p> Bukan Anda? <button type="submit" name="loginAgain">klik disini</button>
         </form>
     </div>
+    <div>
+        <form action="topten.php" method="GET">
+            <button type="submit" name="gameOver" value="false">
+                Lihat top 10 skor
+            </button>  
+        </form>
+    </div>
 <?php } else { ?>
     <div>
-        <h3>Hello <?= $_COOKIE['username']; ?>, tetap semangat ya... you can do the best</h3>
-        Lives: <?= $_SESSION['live']; ?> | Skor: <?= $_SESSION['skor']; ?>
+        <p><b>Hello <?= $_COOKIE['username']; ?>, tetap semangat ya... you can do the best</b>
+        <br>Lives: <?= $_SESSION['live']; ?> | Skor: <?= $_SESSION['skor']; ?></p> 
+       
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
             <label for="inputJawaban">Berapakah <?= $_SESSION['angkaRandom1'] . ' + ' . $_SESSION['angkaRandom2'] .' =' ?> </label>
             <input type="number" name="angkaJawaban" id="inputJawaban" placeholder="Jawaban anda" required>
@@ -74,6 +80,7 @@
             <button type="submit" name="submitJawaban">Jawab</button>
             <?= $hasil;?>
         </form>
+        <br>
     </div>
 <?php } ?>
     
@@ -87,17 +94,17 @@
             if ($angkaJawaban === $hasil) {
                 // angka Jawaban benar
                 $_SESSION['statusJawaban'] = 'Benar';               
-                echo "Selamat ya… Anda benar, Jawaban anda Benar<br>";
+                echo "Hello " . $_COOKIE['username'] . " Selamat ya… , Jawaban anda Benar<br>";
                 echo "Skor: +10";
                 
 
             } else {
                 $_SESSION['statusJawaban'] = 'Salah';
                 // angka Jawaban terlalu besar atau terlalu kecil
-                echo "Hello <nama>, sayang jawaban Anda salah… tetap semangat ya !!!,<br>jawaban yang benar adalah = ". $hasil ."<br>";
+                echo "Hello ". $_COOKIE['username'] .", sayang jawaban Anda salah… tetap semangat ya !!!,<br>jawaban yang benar adalah = ". $hasil ."<br>";
                 echo "Lives: -1 | Skor: -2";
             }
-            echo "<br><a href='index.php'>[Soal Selanjutnya]</a>";
+            echo "<br><br><a href='index.php'>[Soal Selanjutnya]</a>";
 
         }
     } else {  
