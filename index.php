@@ -78,7 +78,9 @@
             <input type="number" name="angkaJawaban" id="inputJawaban" placeholder="Jawaban anda" required>
 
             <button type="submit" name="submitJawaban">Jawab</button>
-            <?= $hasil;?>
+            <?php
+                // echo $hasil;
+            ?>
         </form>
         <br>
     </div>
